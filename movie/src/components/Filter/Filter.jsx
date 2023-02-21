@@ -1,13 +1,13 @@
 import React from 'react'
+import './filter.scss'
 
-import './home.scss';
+export default function Filter(props) {
+
+  console.log(props)
 
 
-export default function Home(props) {
-   
-     
-    return (
-    
+
+  return (
         <div className='card'>
 
         <div className='card__poster-container'>
@@ -22,16 +22,5 @@ export default function Home(props) {
         </div>
         <button className='film-info' onClick={()=>props.AddInfoHandleClick()}>More information</button>
         </div>
-    
-   
- 
-   
-
-    )
-
-
-
-
-
+  )
 }
-

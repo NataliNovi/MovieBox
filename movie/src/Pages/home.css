@@ -1,0 +1,54 @@
+.card {
+  display: flex;
+  margin: 5px;
+  flex-direction: column;
+  align-content: center;
+  text-align: flex-start;
+}
+.card__poster-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+  width: auto;
+  overflow: hidden;
+}
+.card__poster-container:hover img {
+  transform: scale(1.2);
+}
+.card__poster {
+  width: 92%;
+  border-radius: 10px;
+  transition: transform 1.4s;
+}
+.card__description {
+  height: 160px;
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+}
+.card__nameRu {
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin-left: 15px;
+  color: white;
+}
+.card__nameEng {
+  height: 90px;
+  font-size: large;
+  font-weight: 400;
+  margin-left: 15px;
+}
+.card__year {
+  height: 50px;
+  font-size: medium;
+  font-weight: 400;
+  margin-left: 15px;
+}
+.card__genres {
+  margin-left: 15px;
+  height: 50px;
+}
+.card__id {
+  color: white;
+}/*# sourceMappingURL=home.css.map */

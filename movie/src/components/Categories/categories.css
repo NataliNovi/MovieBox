@@ -1,0 +1,26 @@
+.categories {
+  display: flex;
+  justify-content: space-between;
+  margin-left: 25px;
+  margin-right: 25px;
+}
+
+.categories div {
+  display: inline-block;
+  width: 6vw;
+  color: var(--custom-dark-blue);
+  background: var(--custom-dark-blue);
+  margin-bottom: 50px;
+  font-size: 1.2rem;
+  color: white;
+  padding: 10px;
+  border: solid 1px transparent;
+  border-radius: 6px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 500ms ease;
+}
+
+.categories div:hover {
+  transform: scale(1.1);
+}/*# sourceMappingURL=categories.css.map */
