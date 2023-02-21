@@ -12,7 +12,7 @@ Navigate
 import axios from 'axios'
 import logo from './assets/photo/MovieBox.jpg'
 //import {Home,Film,Cartoon,Series,Show,Error} from './Pages';
-import Home from './Pages/Home';
+import Home from './Pages/Home/Home';
 import Categories from './components/Categories/Categories'
 import Filter from './components/Filter/Filter';
 import { PureComponent } from 'react';
@@ -38,18 +38,45 @@ export default class App extends PureComponent {
     currentFilmsList: [],
     userInput: '',
     filteredFilmsList: [],
-   
+   filmsData: '',
+   info: [],
     
   
     }
+
+
     this.state.currentFilmsList=this.state.filmsList;
     this.chooseYearHandleClick=this.chooseYearHandleClick.bind(this)
     this.onSubmit = this.onSubmit.bind(this);
     this.updateInput = this.updateInput.bind(this);
     this.state.currentUserInput=this.state.userInput;
-   
+    this.state.filteredFilmsList=this.state.filmsList;
+    this.loadData=this.loadData.bind(this);
   
-    //console.log(this.state.currentFilmsList);
+
+    console.log(this.state.filteredFilmsList.length);
+    console.log(this.state.currentFilmsList);
+  }
+
+  componentDidMount() {
+
+   this.loadData();
+  
+  }
+
+  loadData = async() => {
+    const response = await fetch('https://kinopoiskapiunofficial.tech/api/v2.2/films/top?type=TOP_250_BEST_FILMS&page=1',
+    {
+              headers: {
+             'X-API-KEY': '484adc53-f3af-4f18-b1ba-5eaf47d68bcd', 
+              'Content-Type': 'application/json',
+       },
+      		})
+    const result = await response.json();
+    this.setState({
+      data:result
+    })
+    console.log(this.state.result.lenght)
   }
 
 
@@ -102,6 +129,84 @@ export default class App extends PureComponent {
 // }
 
 
+chooseYearHandleClick = (year) => {
+  if(year === 'all') {
+    this.setState({currentFilmsList: this.state.filmsList})
+    return
+  }
+  console.log(year);
+  this.setState({
+    currentFilmsList: this.state.filmsList.filter(el=>el.year === year)
+  })
+
+  }
+
+  updateInput(e) {
+    this.setState({userInput: e.target.value});
+  }
+  
+  onSubmit() {
+    const text = this.state.userInput;
+    console.log(text)
+
+    const filteredFilmsList = filmsList.filter(film => {
+      return film.nameRu.toLowerCase().includes(text.toLowerCase())
+
+    // const filteredFilmsList = filmsList.filter((film) => {
+    //    return (film.nameRu.toLowerCase().indexOf(text.toLowerCase())!==-1);
+
+    });
+
+    console.log(filteredFilmsList);
+    console.log(filteredFilmsList.length);
+    console.log(this.state.filteredFilmsList.length);
+    alert(filteredFilmsList[0].nameRu);
+
+  }
+
+
+// // получаем данные с сервера при помощи fetch
+
+// addInfoHandleClick = () => {
+
+// fetch('https://kinopoiskapiunofficial.tech/api/v2.2/films/435', {
+//   method: 'GET',
+//   headers: {
+//       'X-API-KEY': '484adc53-f3af-4f18-b1ba-5eaf47d68bcd',
+//       'Content-Type': 'application/json',
+//   },
+// })
+// .then(result => result.json())
+// .then(json => console.log(json))
+// .catch(err => console.log(err))
+
+// }
+
+
+// получаем данные с сервера при помощи axios
+// addInfoHandleClick = () => {
+
+//   this.getData();}
+
+//  getData = async () => {
+// 	const data = await axios.get(
+// 		`https://kinopoiskapiunofficial.tech/api/v2.2/films/435`,
+// 		{
+//       headers: {
+//         'X-API-KEY': '484adc53-f3af-4f18-b1ba-5eaf47d68bcd', 
+//         'Content-Type': 'application/json',
+//     },
+// 		}
+// 	);
+//   this.setState({
+//     filmsData: data
+//   })
+//  console.log(this.state.filmsData);
+
+// };
+
+
+
 
 render() {
 
@@ -109,17 +214,19 @@ render() {
 
 <>
 <header className="header">
-<Link className="header__slogan" to="/slogan">MovieBox: Develop and Fun</Link>
-<Link to="/logo"><img className="header__logo" src={logo} alt="logo"/></Link>
+<div className="header__slogan">MovieBox: Develop and Fun</div>
+<img className="header__logo" src={logo} alt="logo"/>
+{/* <Link className="header__slogan" to="/slogan">MovieBox: Develop and Fun</Link>
+<Link to="/logo"><img className="header__logo" src={logo} alt="logo"/></Link> */}
 
 </header>
 
 
-<Routes>
+{/* <Routes>
 <Route path ='/slogan' element={<Navigate to='/'/>}/>
 <Route path ='/logo' element={<Navigate to='/'/>}/>
 
-</Routes>
+</Routes> */}
 
 
 <p className='popular'>POPULAR</p>
@@ -135,36 +242,22 @@ render() {
     />
 
     <input  className="search__button" type="submit" value="Search" onClick={this.onSubmit}/> 
-  </div>
-
-  {/* <div className='=filtered'>
-    {this.state.filteredFilmsList[0].nameRu}
-  </div> */}
-
-  {/* <div className='filtered-container'>
-  {this.state.filteredFilmsList.map(film=>(
-  <Filter className='card' key={film.filmId} poster={film.posterUrl} id={film.filmId} title={film.nameRu} titleEng={film.nameEn} countries={film.countries.map(countries=>countries.country)} genres={film.genres.map(genres=>genres.genre)} year={film.year} addInfoHandleClick={this.addInfoHandleClick} > 
-  </Filter>
-))}
-</div> */}
-
-<div className='filtered-container'>
-  {this.state.filteredFilmsList.map(film=>(
-      // <Filter className='card' title={this.state.filteredFilmsList[0].nameRu} > </Filter>
-      <Filter className='card' title={film.nameRu} > </Filter>
-
-  ))}
-
 </div>
 
 
+   {this.state.filteredFilmsList.lenght ? 
+  (<div className='filtered-container'>
+  {this.state.filteredFilmsList.map(film=>(
+      <Filter key={film.filmId} poster={film.posterUrl} title={film.nameRu}></Filter>  
+      ))}
+</div>)
 
-
-
+ : ''}
 
 <div className='cards-container'>
   {this.state.currentFilmsList.map(film=>(
-  <Home className='card' key={film.filmId} poster={film.posterUrl} id={film.filmId} title={film.nameRu} titleEng={film.nameEn} countries={film.countries.map(countries=>countries.country)} genres={film.genres.map(genres=>genres.genre)} year={film.year} addInfoHandleClick={this.addInfoHandleClick} > 
+  <Home className='card' key={film.filmId} poster={film.posterUrl} id={film.filmId} title={film.nameRu} titleEng={film.nameEn} countries={film.countries.map(countries=>countries.country)} genres={film.genres.map(genres=>genres.genre)} year={film.year} addInfoHandleClick={this.addInfoHandleClick} >
+  <NavLink to={film.filmId}>{film.nameEn}</NavLink>
   </Home>
 ))}
 
@@ -173,35 +266,6 @@ render() {
 </>
   )}
 
-  chooseYearHandleClick = (year) => {
-    if(year === 'all') {
-      this.setState({currentFilmsList: this.state.filmsList})
-      return
-    }
-    console.log(year);
-    this.setState({
-      currentFilmsList: this.state.filmsList.filter(el=>el.year === year)
-    })
 
-    }
-
-    updateInput(e) {
-      this.setState({userInput: e.target.value});
-    }
-    
-    onSubmit() {
-      const text = this.state.userInput;
-      console.log(text)
-
-      const filteredFilmsList = filmsList.filter(film => {
-        return film.nameRu.toLowerCase().includes(text.toLowerCase())
-        //return film.nameEn.toLowerCase().includes(text.toLowerCase())
-     
-      })
-
-      console.log(filteredFilmsList);
-      alert(filteredFilmsList[0].nameRu);
-
-    }
 }
 

@@ -1,0 +1,207 @@
+$grid-breakpoint-sm: 360px;
+$grid-breakpoint-md: 768px;
+$grid-breakpoint-lg: 1088px;
+
+
+.card {
+    display: flex;
+    margin: 5px;
+    flex-direction: column;
+    align-content: center;
+    text-align: flex-start;
+    background-color: var(--custom-light-blue);
+    
+
+    &__poster-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 10px;
+        width: auto;
+        overflow: hidden;
+        margin-top: 6px;
+    
+      }
+
+    &__poster-container:hover img {
+        transform: scale(1.2);
+        
+    }
+
+    &__poster {
+        width: 92%;
+        border-radius: 10px;
+        transition: transform 1.4s;
+    }
+
+    &__description {
+       
+        height: 160px;;
+        display: flex;
+        align-items: flex-start;
+        flex-direction: column;
+       
+    }
+    
+    &__nameEng {
+        height:70px;
+        font-size: 1.1rem;
+        margin-left: 10px;
+    }
+
+    &__year {
+        height:50px;
+        font-size: 1rem;
+        margin-left: 10px;
+    }
+
+    &__genres {
+        margin-left: 10px;
+        height:40px;
+        font-size: 1em;
+
+    }
+
+    &__button {
+        background: white;
+        color: var(--custom-dark-blue);
+        width: 96%;
+        margin-left: 4px;
+        border-radius: 4px;
+    }
+}
+
+@media screen and (max-width: $grid-breakpoint-md) {
+    .card {
+    display: flex;
+    margin: 1px;
+    flex-direction: column;
+    align-content: center;
+    text-align: flex-start;
+    background-color: var(--custom-light-blue);
+    
+
+    &__poster-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 8px;
+        width: auto;
+        overflow: hidden;
+        margin-top: 4px;
+      }
+
+    &__poster-container:hover img {
+        transform: scale(1.2);
+        
+    }
+
+    &__poster {
+        width: 92%;
+        border-radius: 8px;
+        transition: transform 1.4s;
+    }
+
+    &__description {
+       
+        height: 160px;;
+        display: flex;
+        align-items: flex-start;
+        flex-direction: column;
+        font-size: 0.9rem;
+        font-weight: 400;
+        margin-left: 5px;
+        
+    }
+
+
+    &__nameEng {
+        height:70px;
+        font-size: 0.9rem;
+        font-weight: 400;
+        margin-left: 5px;
+    }
+
+    &__year {
+        height:50px;
+        font-size: 0.9rem;
+        font-weight: 400;
+        margin-left: 5px;
+    }
+
+    &__genres {
+        margin-left: 5px;
+        height:50px;
+
+    }
+
+}}
+
+@media screen and (max-width: $grid-breakpoint-sm) {
+    .card {
+    display: flex;
+    margin: 1px;
+    flex-direction: column;
+    align-content: center;
+    text-align: flex-start;
+    background-color: var(--custom-light-blue);
+    
+
+    &__poster-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 8px;
+        width: auto;
+        overflow: hidden;
+        margin-top: 4px;
+      }
+
+    &__poster-container:hover img {
+        transform: scale(1.2);
+        
+    }
+
+    &__poster {
+        width: 92%;
+        border-radius: 8px;
+        transition: transform 1.4s;
+    }
+
+    &__description {
+       
+        height: 160px;;
+        display: flex;
+        align-items: flex-start;
+        flex-direction: column;
+        font-size: 0.9rem;
+        font-weight: 400;
+        margin-left: 5px;
+        
+    }
+
+
+    &__nameEng {
+        height:70px;
+        font-size: 0.9rem;
+        font-weight: 400;
+        margin-left: 5px;
+    }
+
+    &__year {
+        height:50px;
+        font-size: 0.9rem;
+        font-weight: 400;
+        margin-left: 5px;
+    }
+
+    &__genres {
+        margin-left: 5px;
+        height:50px;
+
+    }
+
+}}
+
+
+

@@ -1,3 +1,7 @@
+$grid-breakpoint-sm: 360px;
+$grid-breakpoint-md: 768px;
+$grid-breakpoint-lg: 1088px;
+
 .categories {
     display: flex;
     justify-content: space-between;
@@ -23,4 +27,72 @@
 .categories div:hover {
     transform: scale(1.1);
 
+}
+
+@media screen and (max-width: $grid-breakpoint-md) {
+    
+    .categories {
+        width: 100vw;
+        display: grid;
+        grid-template-columns: repeat(5, 20%);
+        grid-template-rows: auto;
+        align-items: center; 
+        align-content: center;
+        
+    }
+
+    .categories div {
+        display: inline-block;
+        width: 8vw;
+        color: var(--custom-dark-blue);
+        background: var(--custom-dark-blue);
+        margin-bottom: 20px;
+        font-size: 1rem;
+        color: white;
+        border: solid 1px transparent;
+        border-radius: 6px;
+        text-align: center;
+        cursor: pointer;
+        transition: all 500ms ease;
+    }
+    
+    .categories div:hover {
+        transform: scale(1.1);
+    
+    }
+    
+}
+
+@media screen and (max-width: $grid-breakpoint-sm) {
+    
+    .categories {
+        width: 94vw;
+        display: grid;
+        grid-template-columns: repeat(5, 20%);
+        grid-template-rows: auto;
+        align-items: center; 
+        align-content: center;
+        
+    }
+
+    .categories div {
+        display: inline-block;
+        width: 6vw;
+        color: var(--custom-dark-blue);
+        background: var(--custom-dark-blue);
+        margin-bottom: 20px;
+        font-size: 0.6rem;
+        color: white;
+        border: solid 1px transparent;
+        border-radius: 6px;
+        text-align: center;
+        cursor: pointer;
+        transition: all 500ms ease;
+    }
+    
+    .categories div:hover {
+        transform: scale(1.1);
+    
+    }
+    
 }

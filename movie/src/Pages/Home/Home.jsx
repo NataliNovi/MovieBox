@@ -4,6 +4,10 @@ import './home.scss';
 
 
 export default function Home(props) {
+
+   // console.log(props)
+
+  
    
      
     return (
@@ -20,12 +24,9 @@ export default function Home(props) {
    
         <div className='card__genres'>{props.genres[0]} {props.genres[1]} {props.genres[2]} {props.genres[3]} {props.genres[4]} {props.genres[5]}</div>
         </div>
-        <button className='film-info' onClick={()=>props.AddInfoHandleClick()}>More information</button>
+        <button className='card__button' onClick={()=>props.loadData()}>More information</button>
         </div>
-    
-   
- 
-   
+
 
     )
 

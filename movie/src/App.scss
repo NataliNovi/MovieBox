@@ -1,6 +1,22 @@
 @import './assets/styles/mixins.scss';
 @import './assets/styles/variables.scss';
 @import url('https://fonts.googleapis.com/css2?family=Mochiy+Pop+P+One&display=swap');
+@import './/assets/styles/normalize.css';
+
+*:before,
+*:after {
+    padding: 0;
+    margin: 0;
+    border: 0;
+    box-sizing: border-box;
+}
+
+/*Переменные для всего проекта*/
+
+
+$grid-breakpoint-sm: 360px;
+$grid-breakpoint-md: 768px;
+$grid-breakpoint-lg: 1088px;
 
 
 .App {
@@ -21,8 +37,7 @@
   &__slogan {
     margin-left: 30px;
     text-decoration: none;
-    font-size: 2.4rem;
-    color: white;
+    @include font-style-logo-lg;
 
   }
 
@@ -37,35 +52,138 @@
   }
 }
 
+
+@media screen and (max-width: $grid-breakpoint-md) {
+
+  .header {
+    width: 100%;
+    height: 140px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    background: var(--custom-dark-blue);
+    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    
+  
+    &__slogan {
+      margin-left: 20px;
+      text-decoration: none;
+      @include font-style-logo-md;
+  
+    }
+  
+    &__link {
+      text-decoration: none;
+      color: white;
+      font-size: var(--font-size-link);
+    }
+  
+    &__logo {
+    height: 140px;
+    }
+  }
+
+}
+
+
+@media screen and (max-width: $grid-breakpoint-sm) {
+
+  .header {
+    width: 100%;
+    height: 100px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    background: var(--custom-dark-blue);
+    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    
+  
+    &__slogan {
+      margin-left: 20px;
+      text-decoration: none;
+      @include font-style-logo-sm;
+  
+    }
+  
+    &__link {
+      text-decoration: none;
+      color: white;
+      font-size: var(--font-size-link);
+    }
+  
+    &__logo {
+    height: 100px;
+    }
+  }
+
+}
+
+
 .popular {
   margin-left: 25px;
   font-size: 2rem;
   color: var(--custom-dark-blue)
 }
 
-.button-container {
-  display: flex;
-  justify-content: space-between;
-  margin: 0 25px 40px 25px;
+@media screen and (max-width: $grid-breakpoint-md) {
+  .popular {
+    margin-left: 15px;
+    font-size: 1rem;
+    color: var(--custom-dark-blue)
+  }
+  
 }
 
-.button__filter {
-  width: 10vw;
-  background-color: var(--custom-dark-blue);
-  color: white;
-  font-size: 1.2rem;
-  border-radius: 6px;
-  height: 2rem;
-  font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+@media screen and (max-width: $grid-breakpoint-sm) {
+  .popular {
+    margin-left: 15px;
+    font-size: 0.8rem;
+    color: var(--custom-dark-blue)
+  }
+  
+}
+
+
+
+
+.filtered-container {
+  display: grid;
+  grid-template-columns: repeat(5, 20%);
+  grid-template-rows: auto;
 }
 
 .cards-container {
   display: grid;
   grid-template-columns: repeat(5, 20%);
   grid-template-rows: auto;
-  /* background-color: var(--custom-dark-blue); */
+
 
 }
+
+@media screen and (max-width: $grid-breakpoint-md) {
+
+.cards-container {
+  display: grid;
+  grid-template-columns: repeat(4, 25%);
+  grid-template-rows: auto;
+
+
+}
+}
+
+@media screen and (max-width: $grid-breakpoint-sm) {
+
+  .cards-container {
+    display: grid;
+    grid-template-columns: repeat(2, 50%);
+    grid-template-rows: auto;
+  
+  
+  }
+  }
+  
 
 
 
