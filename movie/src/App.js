@@ -17,9 +17,8 @@ import Categories from './components/Categories/Categories'
 import Filter from './components/Filter/Filter';
 import { PureComponent } from 'react';
 
-
-
 let filmsList = require('./assets/data/top1.json');
+let id435 = require('./assets/data/id435.json');
     
 //console.log(filmsList[0].year);
 //console.log(filmsList[0].genres[0].genre);
@@ -39,7 +38,8 @@ export default class App extends PureComponent {
     userInput: '',
     filteredFilmsList: [],
    filmsData: '',
-   info: [],
+   id435: [],
+   
     
   
     }
@@ -51,37 +51,50 @@ export default class App extends PureComponent {
     this.updateInput = this.updateInput.bind(this);
     this.state.currentUserInput=this.state.userInput;
     this.state.filteredFilmsList=this.state.filmsList;
-    this.loadData=this.loadData.bind(this);
+    //this.loadData=this.loadData.bind(this);
   
 
     console.log(this.state.filteredFilmsList.length);
     console.log(this.state.currentFilmsList);
   }
 
-  componentDidMount() {
 
-   this.loadData();
+
+   componentDidMount() {
+
+  fetch('https://kinopoiskapiunofficial.tech/api/v2.2/films/top?type=TOP_250_BEST_FILMS&page=1', {
+    method: 'GET',
+    headers: {
+        'X-API-KEY': '484adc53-f3af-4f18-b1ba-5eaf47d68bcd',
+        'Content-Type': 'application/json',
+    },
+  })
+    .then(result => result.json())
+    .then(json => console.log(json))
+    .catch(err => console.log(err))
   
-  }
+    console.log(this.state.filmsList[0].year)
+    console.log(this.state.filmsList[0].nameRu)
 
-  loadData = async() => {
-    const response = await fetch('https://kinopoiskapiunofficial.tech/api/v2.2/films/top?type=TOP_250_BEST_FILMS&page=1',
-    {
-              headers: {
-             'X-API-KEY': '484adc53-f3af-4f18-b1ba-5eaf47d68bcd', 
-              'Content-Type': 'application/json',
-       },
-      		})
-    const result = await response.json();
-    this.setState({
-      data:result
+
+    fetch('https://kinopoiskapiunofficial.tech/api/v2.2/films/435', {
+      method: 'GET',
+      headers: {
+          'X-API-KEY': '484adc53-f3af-4f18-b1ba-5eaf47d68bcd',
+          'Content-Type': 'application/json',
+      },
     })
-    console.log(this.state.result.lenght)
+      .then(result => result.json())
+      .then(json => console.log(json))
+      .catch(err => console.log(err))
+    
+      console.log(this.state.filmsList[0].nameEn)
+      
+
   }
 
 
-
-// получаем данные с сервера при помощи axios
+  // получаем данные с сервера при помощи axios
 //   componentDidMount() {
 
 //   this.getList();}
@@ -109,27 +122,7 @@ export default class App extends PureComponent {
 
 
 
-
-// получаем данные с сервера при помощи fetch
-
-// componentDidMount() {
-
-// fetch('https://kinopoiskapiunofficial.tech/api/v2.2/films/top?type=TOP_250_BEST_FILMS&page=1', {
-//   method: 'GET',
-//   headers: {
-//       'X-API-KEY': '484adc53-f3af-4f18-b1ba-5eaf47d68bcd',
-//       'Content-Type': 'application/json',
-//   },
-// })
-//   .then(result => result.json())
-//   .then(json => console.log(json))
-//   .catch(err => console.log(err))
-
-//   console.log(this.state.filmsList[0].year)
-// }
-
-
-chooseYearHandleClick = (year) => {
+  chooseYearHandleClick = (year) => {
   if(year === 'all') {
     this.setState({currentFilmsList: this.state.filmsList})
     return
@@ -160,52 +153,13 @@ chooseYearHandleClick = (year) => {
     console.log(filteredFilmsList);
     console.log(filteredFilmsList.length);
     console.log(this.state.filteredFilmsList.length);
-    alert(filteredFilmsList[0].nameRu);
+    alert(filteredFilmsList[0].description);
 
   }
 
-
-// // получаем данные с сервера при помощи fetch
-
-// addInfoHandleClick = () => {
-
-// fetch('https://kinopoiskapiunofficial.tech/api/v2.2/films/435', {
-//   method: 'GET',
-//   headers: {
-//       'X-API-KEY': '484adc53-f3af-4f18-b1ba-5eaf47d68bcd',
-//       'Content-Type': 'application/json',
-//   },
-// })
-// .then(result => result.json())
-// .then(json => console.log(json))
-// .catch(err => console.log(err))
-
-// }
-
-
-// получаем данные с сервера при помощи axios
-// addInfoHandleClick = () => {
-
-//   this.getData();}
-
-//  getData = async () => {
-// 	const data = await axios.get(
-// 		`https://kinopoiskapiunofficial.tech/api/v2.2/films/435`,
-// 		{
-//       headers: {
-//         'X-API-KEY': '484adc53-f3af-4f18-b1ba-5eaf47d68bcd', 
-//         'Content-Type': 'application/json',
-//     },
-// 		}
-// 	);
-//   this.setState({
-//     filmsData: data
-//   })
-//  console.log(this.state.filmsData);
-
-// };
-
-
+  loadFilmData() {
+    
+  }
 
 
 render() {
@@ -231,7 +185,11 @@ render() {
 
 <p className='popular'>POPULAR</p>
 
+{/* кнопки фильтра по годам */}
+
 <Categories chooseYearHandleClick={this.chooseYearHandleClick}/>
+
+{/* блок формы поиска на странице */}
 
 <div className="search__form">
     <input className="search__input"
@@ -254,9 +212,11 @@ render() {
 
  : ''}
 
+ {/* передаем пропсы карточкам фильмов */}
+
 <div className='cards-container'>
   {this.state.currentFilmsList.map(film=>(
-  <Home className='card' key={film.filmId} poster={film.posterUrl} id={film.filmId} title={film.nameRu} titleEng={film.nameEn} countries={film.countries.map(countries=>countries.country)} genres={film.genres.map(genres=>genres.genre)} year={film.year} addInfoHandleClick={this.addInfoHandleClick} >
+  <Home className='card' key={film.filmId} poster={film.posterUrl} id={film.filmId} title={film.nameRu} titleEng={film.nameEn} countries={film.countries.map(countries=>countries.country)} genres={film.genres.map(genres=>genres.genre)} year={film.year} description={film.description} url={film.webUrl} addInfoHandleClick={this.addInfoHandleClick} >
   <NavLink to={film.filmId}>{film.nameEn}</NavLink>
   </Home>
 ))}

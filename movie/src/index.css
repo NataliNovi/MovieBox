@@ -26,7 +26,7 @@ code {
 .search__input {
   width: 50%;
   margin-left: 10px;
-  font-size: 0.8rem;
+  font-size: 1rem;
   border-radius: 6px;
   background-color: white;
   color: var(--custom-dark-blue);
@@ -40,50 +40,6 @@ code {
   background-color: white;
   color: var(--custom-dark-blue);
   border: solid var(--custom-light-blue) 2px;
-}
-
-@media screen and (max-width: $grid-breakpoint-md) {
-  .search__form {
-    width: 80%;
-    display: flex;
-    margin-left: 10px;
-    margin-bottom: 20px;
-  }
-  
-  .search__input {
-    width: 50%;
-  
-    margin-left: 10px;
-  }
-  
-  .search__button {
-    width: 20%;
-   
-    margin-left: 10px;
-  }
-  
-}
-
-@media screen and (max-width: $grid-breakpoint-sm) {
-  .search__form {
-    width: 80%;
-    display: flex;
-    margin-left: 10px;
-    margin-bottom: 20px;
-  }
-  
-  .search__input {
-    width: 100%;
-  
-    margin-left: 10px;
-  }
-  
-  .search__button {
-    width: 20%;
-   
-    margin-left: 10px;
-  }
-  
 }
 
 
