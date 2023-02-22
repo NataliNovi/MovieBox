@@ -153,7 +153,7 @@ export default class App extends PureComponent {
     console.log(filteredFilmsList);
     console.log(filteredFilmsList.length);
     console.log(this.state.filteredFilmsList.length);
-    alert(filteredFilmsList[0].description);
+    alert(filteredFilmsList[0].nameRu);
 
   }
 
